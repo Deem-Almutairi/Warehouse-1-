@@ -1,0 +1,12 @@
+# Render Blueprint: New + > Blueprint, point it at your Git repository.
+services:
+  - type: web
+    name: warehouse-dss
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
